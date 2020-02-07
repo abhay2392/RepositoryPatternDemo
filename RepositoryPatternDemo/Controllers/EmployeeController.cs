@@ -4,20 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RepositoryPatternDemo.Repository;
+using RepositoryPatternDemo.GenericRepository;
 using RepositoryPatternDemo.DAL;
 
 namespace RepositoryPatternDemo.Controllers
 {
     public class EmployeeController : Controller
     {
-        private IEmployeeRepository _employeeRepository;
+        //private IEmployeeRepository _employeeRepository;
+        private IGenericRepository<Employee> _employeeRepository;
 
         public EmployeeController()
         {
-            _employeeRepository = new EmployeeRepository(new EmployeeDBContext());
+            _employeeRepository = new GenericRepository<Employee>();
         }
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IGenericRepository<Employee> employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
