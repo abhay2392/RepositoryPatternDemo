@@ -13,10 +13,12 @@ namespace RepositoryPatternDemo.Controllers
     {
         //private IEmployeeRepository _employeeRepository;
         private IGenericRepository<Employee> _employeeRepository;
+        private EntityEmployeeRepository _entityRepository;
 
         public EmployeeController()
         {
             _employeeRepository = new GenericRepository<Employee>();
+            _entityRepository = new EntityEmployeeRepository(new EmployeeDBContext());
         }
 
         public EmployeeController(IGenericRepository<Employee> employeeRepository)
@@ -28,7 +30,8 @@ namespace RepositoryPatternDemo.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _employeeRepository.GetAll();
+            // var model = _employeeRepository.GetAll();
+            var model = _entityRepository.GetEmployeesByGender("Female");
             return View(model);
         }
         [HttpGet]
